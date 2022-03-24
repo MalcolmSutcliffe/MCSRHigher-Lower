@@ -50,8 +50,9 @@ class Game:
 
     # if the guess was correct, update the clues and play another round
     def correct_guess(self, guess_type):
-        print("correct! " + self.__clue_one["name"] + " has a " + guess_type + " time than "
-              + self.__clue_two["name"] + " with: " + str(self.__clue_two["time"]))
+        print("correct! " + self.__clue_one["name"] + " (" + str(self.__clue_one["time"]) + ")"
+              + " has a " + guess_type + " time than "
+              + self.__clue_two["name"] + " (" + str(self.__clue_two["time"]) + ")")
         self.__score = self.__score + 1
         self.__clue_one = self.__clue_two
         self.__clue_two = self.__get_next_value()
@@ -59,8 +60,9 @@ class Game:
 
     # if incorrect guess, end the game
     def incorrect_guess(self, guess_type):
-        print("incorrect! " + self.__clue_one["name"] + " does not have a " + guess_type + " time than "
-              + self.__clue_two["name"] + " with: " + str(self.__clue_two["time"]))
+        print("incorrect! " + self.__clue_one["name"] + " (" + str(self.__clue_one["time"]) + ")" + " does not have a "
+              + guess_type + " time than "
+              + self.__clue_two["name"] + " (" + str(self.__clue_two["time"]) + ")")
         self.game_lost()
 
     # if somehow they win the game
