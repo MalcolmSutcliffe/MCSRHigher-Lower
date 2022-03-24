@@ -1,5 +1,4 @@
 import Data
-from Data import *
 from Game import Game
 
 if __name__ == '__main__':

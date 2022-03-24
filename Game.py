@@ -56,7 +56,8 @@ class Game:
         self.__score = self.__score + 1
         self.__clue_one = self.__clue_two
         self.__clue_two = self.__get_next_value()
-        self.play_round()
+        if self.__is_running:
+            self.play_round()
 
     # if incorrect guess, end the game
     def incorrect_guess(self, guess_type):

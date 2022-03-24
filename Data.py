@@ -3,7 +3,7 @@ import random
 
 TIME_LIST = []
 
-TIME_CUTOFF = LeaderboardTime("20:00:000")
+TIME_CUTOFF = LeaderboardTime("15:00:000")
 
 
 def initialize_data():
