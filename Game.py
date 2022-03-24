@@ -19,9 +19,9 @@ class Game:
         self.play_round()
 
     def play_round(self):
-        print("-" * (12 + len(str(self.__score + 1))))
+        print("-" * (11 + len(str(self.__score + 1))))
         print("| ROUND: " + str(self.__score + 1) + " |")
-        print("-" * (12 + len(str(self.__score + 1))))
+        print("-" * (11 + len(str(self.__score + 1))))
         # display clues:
         print(self.__clue_one["name"] + " with a time of: " + str(self.__clue_one["time"])
               + " is higher or lower than: " + self.__clue_two["name"] + "?")

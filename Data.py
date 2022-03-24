@@ -23,7 +23,7 @@ DEFAULT_VERIFIED_ONLY = True
 
 def initialize_data(time_cutoff=DEFAULT_TIME_CUTOFF, countries=DEFAULT_COUNTRIES, verified_only=DEFAULT_VERIFIED_ONLY):
 
-    data1_16 = wks.get()
+    data1_16 = wks.get_all_values()
 
     for line in data1_16[2:]:
         if line[0] == ",":
