@@ -19,37 +19,36 @@ class Game:
         self.play_round()
 
     def play_round(self):
-        print("-"*(12 + len(str(self.__score + 1))))
+        print("-" * (12 + len(str(self.__score + 1))))
         print("| ROUND: " + str(self.__score + 1) + " |")
-        print("-"*(12 + len(str(self.__score + 1))))
+        print("-" * (12 + len(str(self.__score + 1))))
+        # display clues:
         print(self.__clue_one["name"] + " with a time of: " + str(self.__clue_one["time"])
               + " is higher or lower than: " + self.__clue_two["name"] + "?")
-        while self.__is_running:
-            var = input("h/l:")
-            if var[0] != "h" and var[0] != "l":
-                print("unrecognized guess, try again")
-                continue
-            if var[0] == "h" and self.__clue_one["time"] >= self.__clue_two["time"]:
-                self.correct_guess("higher")
-                break
-            elif var[0] == "l" and self.__clue_one["time"] <= self.__clue_two["time"]:
-                self.correct_guess("lower")
-                break
-            elif var[0] == "h":
-                self.incorrect_guess("higher")
-                break
-            elif var[0] == "l":
-                self.incorrect_guess("lower")
-                break
+        # wait for input
+        var = input("h/l:")
 
+        # verify input and process whether it was a correct guess or not
+        if var[0] != "h" and var[0] != "l":
             print("unrecognized guess, try again")
+            return self.play_round()
+        if var[0] == "h" and self.__clue_one["time"] >= self.__clue_two["time"]:
+            self.correct_guess("higher")
+        elif var[0] == "l" and self.__clue_one["time"] <= self.__clue_two["time"]:
+            self.correct_guess("lower")
+        elif var[0] == "h":
+            self.incorrect_guess("higher")
+        elif var[0] == "l":
+            self.incorrect_guess("lower")
 
+    # pops the top element on the list
     def __get_next_value(self):
         if len(self.__game_order) == 0:
             self.game_won()
             return
         return self.__game_order.pop()
 
+    # if the guess was correct, update the clues and play another round
     def correct_guess(self, guess_type):
         print("correct! " + self.__clue_one["name"] + " has a " + guess_type + " time than "
               + self.__clue_two["name"] + " with: " + str(self.__clue_two["time"]))
@@ -58,19 +57,23 @@ class Game:
         self.__clue_two = self.__get_next_value()
         self.play_round()
 
+    # if incorrect guess, end the game
     def incorrect_guess(self, guess_type):
         print("incorrect! " + self.__clue_one["name"] + " does not have a " + guess_type + " time than "
               + self.__clue_two["name"] + " with: " + str(self.__clue_two["time"]))
         self.game_lost()
 
+    # if somehow they win the game
     def game_won(self):
         print("Congrats! You win 0.o")
         self.__is_running = False
 
+    # lost game
     def game_lost(self):
         print("You Lost!")
         self.__is_running = False
 
+    # getters
     def get_is_running(self):
         return self.__is_running
 

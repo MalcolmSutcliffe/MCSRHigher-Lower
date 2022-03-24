@@ -1,7 +1,9 @@
 from LeaderboardTime import LeaderboardTime
 import random
 
-time_list = []
+TIME_LIST = []
+
+TIME_CUTOFF = LeaderboardTime("20:00:000")
 
 
 def initialize_data():
@@ -16,10 +18,12 @@ def initialize_data():
             "time": LeaderboardTime(line_values[2]),
             "country": line_values[4]
         }
-        time_list.append(data_to_append)
+        if data_to_append["time"] > TIME_CUTOFF:
+            break
+        TIME_LIST.append(data_to_append)
 
 
 def generate_new_order():
-    new_list = time_list.copy()
+    new_list = TIME_LIST.copy()
     random.shuffle(new_list)
     return new_list
