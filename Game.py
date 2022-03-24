@@ -73,6 +73,7 @@ class Game:
     # lost game
     def game_lost(self):
         print("You Lost!")
+        print("score: " + str(self.__score))
         self.__is_running = False
 
     # getters
