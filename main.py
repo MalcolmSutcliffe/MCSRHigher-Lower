@@ -5,7 +5,7 @@ from website import create_app
 app = create_app()
 
 if __name__ == '__main__':
-    # Data.verify_data()
+    # Data.import_data()
     # app.run(debug=True)
     Data.initialize_data()
     is_running = True

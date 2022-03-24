@@ -19,10 +19,10 @@ DEFAULT_COUNTRIES = frozenset(['Argentina', 'Australia', 'Belarus', 'Brazil', 'B
 DEFAULT_VERIFIED_ONLY = True
 
 
-def verify_data():
+def import_data():
     credentials = "credentials.json"
     sa = gspread.service_account(credentials)
-    sh = sa.open("RSG 1.16+ Leaderboard")
+    sh = sa.open("RSG 1.16+ Leaderboard")  # auto-updates every hour according to spreadsheet by EricSkiGuy
     wks = sh.worksheet("1.16+ RSG")
     with open("website/data/Data_1_16", "w", newline="") as f:
         writer = csv.writer(f)
@@ -30,12 +30,11 @@ def verify_data():
 
 
 def initialize_data(time_cutoff=DEFAULT_TIME_CUTOFF, countries=DEFAULT_COUNTRIES, verified_only=DEFAULT_VERIFIED_ONLY):
-
     with open("website/data/Data_1_16", "r") as file:
         csv_reader = reader(file)
         data1_16 = list(csv_reader)
 
-    for line in data1_16[2:]:
+    for line in data1_16:
         if line[0] == ",":
             continue
         data_to_append = {
