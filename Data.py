@@ -1,12 +1,8 @@
 from LeaderboardTime import LeaderboardTime
 import random
 import gspread
-import os
-
-credentials = "C:/Users/malco/Documents/Malcolm_Stuff/Projects/Higher-Lower-MCSR-webapp/credentials.json"
-sa = gspread.service_account(credentials)
-sh = sa.open("RSG 1.16+ Leaderboard")
-wks = sh.worksheet("1.16+ RSG")
+import csv
+from csv import reader
 
 TIME_LIST = []
 
@@ -23,8 +19,21 @@ DEFAULT_COUNTRIES = frozenset(['Argentina', 'Australia', 'Belarus', 'Brazil', 'B
 DEFAULT_VERIFIED_ONLY = True
 
 
+def verify_data():
+    credentials = "credentials.json"
+    sa = gspread.service_account(credentials)
+    sh = sa.open("RSG 1.16+ Leaderboard")
+    wks = sh.worksheet("1.16+ RSG")
+    with open("website/data/Data_1_16", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(wks.get_all_values())
+
+
 def initialize_data(time_cutoff=DEFAULT_TIME_CUTOFF, countries=DEFAULT_COUNTRIES, verified_only=DEFAULT_VERIFIED_ONLY):
-    data1_16 = wks.get_all_values()
+
+    with open("website/data/Data_1_16", "r") as file:
+        csv_reader = reader(file)
+        data1_16 = list(csv_reader)
 
     for line in data1_16[2:]:
         if line[0] == ",":

@@ -1,19 +1,13 @@
 import Data
 from Game import Game
-from flask import Flask
+from website import create_app
 
-app = Flask(__name__)
-
-
-# @app.route("/")
-# def index():
-#     return "Congratulations, it's a web app!"
-
+app = create_app()
 
 if __name__ == '__main__':
-    # app.run(host="127.0.0.1", port=8080, debug=True)
+    # Data.verify_data()
+    # app.run(debug=True)
     Data.initialize_data()
-    new_game = Game()
     is_running = True
     while is_running:
         user_input = input("Play a game?: y/n \n")
@@ -27,4 +21,5 @@ if __name__ == '__main__':
         elif user_input[0] != "y":
             print("unknown input. Try again")
             continue
+        new_game = Game()
         new_game.play()
