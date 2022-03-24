@@ -30,6 +30,9 @@ class Game:
         var = input("h/l:")
 
         # verify input type:
+        if not var:
+            print("unrecognized guess, try again")
+            return self.play_round()
         if var[0] == "h":
             guess_higher = True
         elif var[0] == "l":

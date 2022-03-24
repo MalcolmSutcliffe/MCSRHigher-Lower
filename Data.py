@@ -1,8 +1,10 @@
 from LeaderboardTime import LeaderboardTime
 import random
 import gspread
+import os
 
-sa = gspread.service_account("credentials.json")
+credentials = "C:/Users/malco/Documents/Malcolm_Stuff/Projects/Higher-Lower-MCSR-webapp/credentials.json"
+sa = gspread.service_account(credentials)
 sh = sa.open("RSG 1.16+ Leaderboard")
 wks = sh.worksheet("1.16+ RSG")
 
@@ -22,7 +24,6 @@ DEFAULT_VERIFIED_ONLY = True
 
 
 def initialize_data(time_cutoff=DEFAULT_TIME_CUTOFF, countries=DEFAULT_COUNTRIES, verified_only=DEFAULT_VERIFIED_ONLY):
-
     data1_16 = wks.get_all_values()
 
     for line in data1_16[2:]:

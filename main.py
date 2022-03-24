@@ -17,6 +17,9 @@ if __name__ == '__main__':
     is_running = True
     while is_running:
         user_input = input("Play a game?: y/n \n")
+        if not user_input:
+            print("unknown input. Try again")
+            continue
         if user_input[0] == "n":
             print("okay, bye!")
             is_running = False
