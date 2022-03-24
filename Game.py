@@ -25,20 +25,27 @@ class Game:
         # display clues:
         print(self.__clue_one["name"] + " with a time of: " + str(self.__clue_one["time"])
               + " is higher or lower than: " + self.__clue_two["name"] + "?")
+
         # wait for input
         var = input("h/l:")
 
-        # verify input and process whether it was a correct guess or not
-        if var[0] != "h" and var[0] != "l":
+        # verify input type:
+        if var[0] == "h":
+            guess_higher = True
+        elif var[0] == "l":
+            guess_higher = False
+        else:
             print("unrecognized guess, try again")
             return self.play_round()
-        if var[0] == "h" and self.__clue_one["time"] >= self.__clue_two["time"]:
+
+        # process whether guess was correct
+        if guess_higher and self.__clue_one["time"] >= self.__clue_two["time"]:
             self.correct_guess("higher")
-        elif var[0] == "l" and self.__clue_one["time"] <= self.__clue_two["time"]:
+        elif not guess_higher and self.__clue_one["time"] <= self.__clue_two["time"]:
             self.correct_guess("lower")
-        elif var[0] == "h":
+        elif guess_higher:
             self.incorrect_guess("higher")
-        elif var[0] == "l":
+        elif not guess_higher:
             self.incorrect_guess("lower")
 
     # pops the top element on the list
